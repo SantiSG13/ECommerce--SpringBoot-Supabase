@@ -240,13 +240,15 @@ body::after {
 .campo-texto {
     width: 100%;
     padding: 0.8rem 1rem;
-    background: rgba(10, 7, 18, 0.8);
+    background: rgba(10, 7, 18, 0.55);
     border: 1px solid var(--border-purple);
     border-radius: 10px;
     color: var(--text-main);
     font-size: 0.95rem;
     outline: none;
     transition: all 0.25s ease;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .campo-texto::placeholder {
@@ -255,8 +257,19 @@ body::after {
 
 .campo-texto:focus {
     border-color: var(--purple-main);
-    background: rgba(15, 10, 26, 0.95);
+    background: rgba(15, 10, 26, 0.75);
     box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
+}
+
+/* Evita que el autofill del navegador ponga fondo blanco */
+.campo-texto:-webkit-autofill,
+.campo-texto:-webkit-autofill:hover,
+.campo-texto:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgba(10, 7, 18, 0.95) inset;
+    -webkit-text-fill-color: var(--text-main);
+    caret-color: var(--text-main);
+    border-color: var(--border-purple);
+    transition: background-color 9999s ease-in-out 0s;
 }
 
 /* Botones */
@@ -345,4 +358,28 @@ body::after {
     color: var(--text-muted);
     font-size: 0.8rem;
     margin-top: 2.5rem;
+}
+
+/* Botón cerrar sesión — esquina superior derecha */
+.btn-logout-fijo {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.btn-logout-fijo:hover {
+    background: rgba(239, 68, 68, 0.28);
+    color: #ffffff;
+    border-color: rgba(239, 68, 68, 0.6);
 }

@@ -11,71 +11,75 @@ import jakarta.persistence.Table;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String Nombre;
-    private Double Precio;
-    private Integer Stock;
-    private String Categoria;
-    private String Descripcion;
+    private Long id;
+
+    private String nombre;
+
+    private Double precio;
+
+    private Integer stock;
+    private String categoria;
+
+    private String descripcion;
 
     public Producto(Long id, String nombre, Double precio, Integer stock, String categoria, String descripcion) {
-        Id = id;
-        Nombre = nombre;
-        Precio = precio;
-        Stock = stock;
-        Categoria = categoria;
-        Descripcion = descripcion;
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
     }
 
     public Producto() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public Double getPrecio() {
-        return Precio;
+        return precio;
     }
 
     public void setPrecio(Double precio) {
-        Precio = precio;
+        this.precio = precio;
     }
 
     public Integer getStock() {
-        return Stock;
+        return stock;
     }
 
     public void setStock(Integer stock) {
-        Stock = stock;
+        this.stock = stock;
     }
 
     public String getCategoria() {
-        return Categoria;
+        return categoria;
     }
 
     public void setCategoria(String categoria) {
-        Categoria = categoria;
+        this.categoria = categoria;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
 }

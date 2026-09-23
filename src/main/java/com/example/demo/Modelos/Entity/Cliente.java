@@ -15,61 +15,61 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String Nombre, Apellido, Email;
+    private Long id;    
+    
+    private String nombre, apellido, email;
 
     @Column(name = "create_at")
-    private Date CreateAt;
+    private Date createAt;
 
-    public Cliente(Long id, String nombre, String apellido, String email, Date CreateAt) {
-        this.Id = id;
-        this.Nombre = nombre;
-        this.Apellido = apellido;
-        this.Email = email;
-        this.CreateAt = CreateAt;
+    public Cliente(Long id, String nombre, String apellido, String email, Date createAt) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.createAt = createAt;
     }
 
     public Cliente() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public Date getCreateAt() {
-        return CreateAt;
+        return createAt;
     }
 
-    public void setCreateAt(Date CreateAt) {
-        this.CreateAt = CreateAt;
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
     }
-
 }

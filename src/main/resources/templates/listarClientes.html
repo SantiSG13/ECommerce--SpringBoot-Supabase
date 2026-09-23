@@ -11,6 +11,11 @@
 </head>
 
 <body>
+    <!-- Botón cerrar sesión fijo en esquina superior derecha -->
+    <form th:action="@{/logout}" method="post" style="margin: 0;">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
     <div class="contenedor-principal">
 
         <!-- Encabezado de la página -->
