@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Carrito de Compras</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
+    <div class="contenedor-principal">
+
+        <div class="encabezado-seccion">
+            <h1 class="titulo-pagina" th:text="${titulo}">Carrito de Compras</h1>
+            <p class="subtitulo-pagina">Revisa los productos seleccionados antes de confirmar tu pedido</p>
+        </div>
+
+        <div class="barra-acciones">
+            <div class="barra-izquierda">
+                <a th:href="@{/Producto/listar}" class="btn btn-secundario">&larr; Seguir Comprando</a>
+                <a th:href="@{/compras/mis-compras}" class="btn btn-secundario">&#128220; Mis Facturas</a>
+            </div>
+            <div class="barra-derecha" th:if="${!carrito.isEmpty()}">
+                <a th:href="@{/carrito/vaciar}" class="btn btn-secundario btn-vaciar"
+                   onclick="return confirm('¿Seguro que deseas vaciar todo el carrito?');">&#128465; Vaciar Carrito</a>
+            </div>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <!-- Alertas -->
+        <div th:if="${success}" class="alerta-exito" th:text="${success}"></div>
+        <div th:if="${error}" class="alerta-error" th:text="${error}"></div>
+
+        <!-- Si el carrito está vacío -->
+        <div th:if="${carrito.isEmpty()}" class="tarjeta-registro estado-vacio">
+            <span class="icono-grande">&#128722;</span>
+            <h2 class="estado-vacio-titulo">Tu carrito está vacío</h2>
+            <p class="subtitulo-pagina">Aún no has agregado ningún producto a tu lista de compra.</p>
+            <a th:href="@{/Producto/listar}" class="btn btn-principal btn-vacio-accion">Ir al Catálogo de Productos</a>
+        </div>
+
+        <!-- Si el carrito tiene productos -->
+        <div th:if="${!carrito.isEmpty()}">
+            <div class="tarjeta-registro tarjeta-tabla">
+                <table class="tabla-carrito">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio Unit.</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${carrito}">
+                            <td class="td-nombre">
+                                <span th:text="${item.producto.nombre}"></span>
+                                <br>
+                                <span class="etiqueta-dato" th:text="${item.producto.categoria}"></span>
+                            </td>
+                            <td th:text="${'$' + #numbers.formatDecimal(item.producto.precio, 1, 'POINT', 2, 'COMMA')}"></td>
+                            <td th:text="${item.cantidad}"></td>
+                            <td class="td-subtotal" th:text="${'$' + #numbers.formatDecimal(item.subtotal, 1, 'POINT', 2, 'COMMA')}"></td>
+                            <td>
+                                <a th:href="@{/carrito/eliminar/} + ${item.producto.id}" class="btn-eliminar">Quitar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Resumen y Total -->
+            <div class="fila-total">
+                <span class="total-label">Total a Pagar:</span>
+                <span class="total-valor" th:text="${'$' + #numbers.formatDecimal(total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+            <!-- Botón Finalizar Compra -->
+            <form th:action="@{/carrito/comprar}" method="post" class="barra-acciones-carrito">
+                <button type="submit" class="btn btn-principal" style="padding: 1rem 2rem; font-size: 1rem;">
+                    &#128179; Confirmar y Pagar Compra
+                </button>
+            </form>
+        </div>
+
+        <p class="nota-pie">Sistema de Compras &bull; Spring Boot & Thymeleaf</p>
+    </div>
+</body>
+</html>

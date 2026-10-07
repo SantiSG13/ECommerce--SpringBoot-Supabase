@@ -34,8 +34,12 @@
                 <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuarios}" class="btn btn-secundario btn-gestionar-usuarios">
                     &#9881; Gestionar Usuarios
                 </a>
+                <a th:href="@{/compras/mis-compras}" class="btn btn-secundario">&#128220; Mis Facturas</a>
             </div>
             <div class="barra-derecha">
+                <a th:href="@{/carrito/ver}" class="btn btn-secundario btn-carrito">
+                    &#128722; Ver Carrito
+                </a>
                 <a sec:authorize="hasRole('ADMIN')" th:href="@{/Producto/formulario}" class="btn btn-principal">+ Crear Producto</a>
             </div>
         </div>
@@ -74,6 +78,21 @@
                         <span class="etiqueta-dato">Descripción</span>
                         <p class="valor-dato" th:text="${producto.descripcion != null && !producto.descripcion.isEmpty() ? producto.descripcion : 'Sin descripción'}"></p>
                     </div>
+                </div>
+
+                <!-- Formulario Agregar al Carrito -->
+                <div class="fila-agregar-carrito" th:if="${producto.stock > 0}">
+                    <form th:action="@{/carrito/agregar}" method="post" class="form-cantidad">
+                        <input type="hidden" name="productoId" th:value="${producto.id}" />
+                        <label class="etiqueta-dato" style="margin-right: 0.25rem;">Cantidad:</label>
+                        <input type="number" name="cantidad" value="1" min="1" th:max="${producto.stock}" class="input-cantidad-producto" required />
+                        <button type="submit" class="btn btn-principal btn-agregar-carrito">
+                            &#128722; Agregar al Carrito
+                        </button>
+                    </form>
+                </div>
+                <div class="fila-agregar-carrito" th:if="${producto.stock <= 0}">
+                    <span class="sin-stock">&#9888; Producto agotado temporalmente</span>
                 </div>
             </div>
         </div>

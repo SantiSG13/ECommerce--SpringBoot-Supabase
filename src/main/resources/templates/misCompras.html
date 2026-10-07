@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Historial de Compras</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
+    <div class="contenedor-principal">
+
+        <div class="encabezado-seccion">
+            <h1 class="titulo-pagina" th:text="${titulo}">Historial de Facturas</h1>
+            <p class="subtitulo-pagina">Consulta los comprobantes y detalles de tus compras anteriores</p>
+        </div>
+
+        <div class="barra-acciones">
+            <div class="barra-izquierda">
+                <a th:href="@{/Producto/listar}" class="btn btn-secundario">&larr; Volver al Catálogo</a>
+                <a th:href="@{/carrito/ver}" class="btn btn-secundario">&#128722; Ver Carrito</a>
+            </div>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <div th:if="${compras.isEmpty()}" class="tarjeta-registro estado-vacio">
+            <span class="icono-grande">&#128220;</span>
+            <h2 class="estado-vacio-titulo">No hay compras registradas</h2>
+            <p class="subtitulo-pagina">Aún no has realizado ninguna compra en nuestra plataforma.</p>
+            <a th:href="@{/Producto/listar}" class="btn btn-principal btn-vacio-accion">Comenzar a Comprar</a>
+        </div>
+
+        <div th:if="${!compras.isEmpty()}">
+            <div th:each="compra : ${compras}" class="tarjeta-registro" style="margin-bottom: 1.5rem;">
+                <div class="tarjeta-cabecera">
+                    <div>
+                        <h2 class="tarjeta-titulo" th:text="${'Factura N° #000' + compra.id}"></h2>
+                        <span class="subtitulo-pagina" th:text="${'Fecha: ' + #dates.format(compra.fecha, 'dd/MM/yyyy HH:mm')}"></span>
+                    </div>
+                    <div class="tarjeta-acciones">
+                        <span class="insignia insignia-total" th:text="${'Total: $' + #numbers.formatDecimal(compra.total, 1, 'POINT', 2, 'COMMA')}"></span>
+                        <a th:href="@{/compras/factura/} + ${compra.id}" class="btn-editar" style="padding: 0.4rem 0.8rem;">Ver Detalle</a>
+                    </div>
+                </div>
+
+                <table class="tabla-detalles">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cant.</th>
+                            <th>Precio Unit.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="det : ${compra.detalles}">
+                            <td th:text="${det.producto.nombre}"></td>
+                            <td th:text="${det.cantidad}"></td>
+                            <td th:text="${'$' + #numbers.formatDecimal(det.precioUnitario, 1, 'POINT', 2, 'COMMA')}"></td>
+                            <td class="td-subtotal" th:text="${'$' + #numbers.formatDecimal(det.calcularSubtotal(), 1, 'POINT', 2, 'COMMA')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="nota-pie">Registro de Compras &bull; Spring Boot & Thymeleaf</p>
+    </div>
+</body>
+</html>

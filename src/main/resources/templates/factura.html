@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Factura de Venta</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
+    <div class="contenedor-principal">
+
+        <div class="barra-acciones" style="margin-bottom: 1.5rem;">
+            <div class="barra-izquierda">
+                <a th:href="@{/Producto/listar}" class="btn btn-secundario">&larr; Volver a la Tienda</a>
+                <a th:href="@{/compras/mis-compras}" class="btn btn-secundario">&#128220; Mis Facturas</a>
+            </div>
+            <div class="barra-derecha">
+                <button onclick="window.print()" class="btn btn-imprimir">&#128424; Imprimir Factura</button>
+            </div>
+        </div>
+
+        <!-- Tarjeta de la Factura -->
+        <div class="tarjeta-factura">
+            
+            <!-- Encabezado de la Factura -->
+            <div class="factura-encabezado">
+                <div>
+                    <h1 class="titulo-pagina">Factura de Venta</h1>
+                    <p class="factura-numero" th:text="${'N° #000' + compra.id}"></p>
+                </div>
+                <div style="text-align: right;">
+                    <span class="insignia" style="font-size: 0.85rem; padding: 0.4rem 1rem;">&#10004; Pagada</span>
+                    <p class="factura-fecha" th:text="${'Fecha: ' + #dates.format(compra.fecha, 'dd/MM/yyyy HH:mm')}"></p>
+                </div>
+            </div>
+
+            <!-- Datos del Cliente -->
+            <div class="factura-cliente-box">
+                <h3 class="etiqueta-dato" style="font-size: 0.8rem; color: var(--purple-light);">Datos del Comprador</h3>
+                <div class="factura-cliente-grid">
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Cliente</span>
+                        <p class="valor-dato" th:text="${compra.cliente.nombre + ' ' + compra.cliente.apellido}"></p>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Correo Electrónico</span>
+                        <p class="valor-dato" th:text="${compra.cliente.email}"></p>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">ID Cliente</span>
+                        <p class="valor-dato" th:text="${'#' + compra.cliente.id}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Detalles de la Compra -->
+            <div class="tarjeta-registro tarjeta-tabla" style="margin-bottom: 1.5rem;">
+                <table class="tabla-carrito">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Producto</th>
+                            <th>Cant.</th>
+                            <th>Precio Unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="det, iterStat : ${compra.detalles}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td class="td-nombre">
+                                <span th:text="${det.producto.nombre}"></span>
+                                <br>
+                                <span class="etiqueta-dato" th:text="${det.producto.categoria}"></span>
+                            </td>
+                            <td th:text="${det.cantidad}"></td>
+                            <td th:text="${'$' + #numbers.formatDecimal(det.precioUnitario, 1, 'POINT', 2, 'COMMA')}"></td>
+                            <td class="td-subtotal" th:text="${'$' + #numbers.formatDecimal(det.calcularSubtotal(), 1, 'POINT', 2, 'COMMA')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Gran Total -->
+            <div class="fila-total">
+                <span class="total-label">Total Liquidado:</span>
+                <span class="total-valor" th:text="${'$' + #numbers.formatDecimal(compra.total, 1, 'POINT', 2, 'COMMA')}"></span>
+            </div>
+
+        </div>
+
+        <p class="nota-pie">Comprobante de Pago Electrónico generado por el Sistema &bull; Spring Boot</p>
+    </div>
+</body>
+</html>
