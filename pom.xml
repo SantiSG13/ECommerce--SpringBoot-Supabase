@@ -43,10 +43,10 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- Base de datos H2 en memoria -->
+		<!-- Base de datos PostgreSQL para Supabase -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 

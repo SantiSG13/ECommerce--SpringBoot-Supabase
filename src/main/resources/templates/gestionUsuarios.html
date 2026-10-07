@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
+    <div class="contenedor-principal">
+
+        <div class="encabezado-seccion">
+            <h1 class="titulo-pagina" th:text="${titulo}">Gestión de Usuarios</h1>
+            <p class="subtitulo-pagina">Aprueba nuevos usuarios y administra los existentes</p>
+        </div>
+
+        <ul class="lista-atributos">
+            <li class="insignia">ID</li>
+            <li class="insignia">Usuario</li>
+            <li class="insignia">Rol</li>
+            <li class="insignia">Estado</li>
+        </ul>
+
+        <div class="barra-acciones">
+            <a th:href="@{/admin/dashboard}" class="btn btn-secundario">&larr; Dashboard</a>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <div th:if="${success}" class="alerta-exito" th:text="${success}"></div>
+
+        <!-- PENDIENTES -->
+        <div class="seccion-usuarios">
+            <h2 class="subtitulo-seccion-pendiente">
+                ⏳ Pendientes de aprobación
+                <span th:if="${#lists.isEmpty(pendientes)}" class="subtitulo-seccion-nota">— ninguno por ahora</span>
+            </h2>
+
+            <div th:each="u : ${pendientes}" class="tarjeta-registro">
+                <div class="tarjeta-cabecera">
+                    <h2 class="tarjeta-titulo" th:text="${u.usuario}"></h2>
+                    <span class="insignia" th:text="${'ID #' + u.id}"></span>
+                </div>
+                <div class="rejilla-datos">
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Estado</span>
+                        <p class="valor-dato valor-pendiente">⏳ Pendiente</p>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Rol actual</span>
+                        <p class="valor-dato" th:text="${u.rol != null ? u.rol : 'Sin asignar'}"></p>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Aprobar como</span>
+                        <div class="fila-botones">
+                            <form th:action="@{/admin/aprobar/} + ${u.id}" method="post">
+                                <input type="hidden" name="rol" value="ROLE_CLIENTE">
+                                <button type="submit" class="btn-editar">✓ Cliente</button>
+                            </form>
+                            <form th:action="@{/admin/aprobar/} + ${u.id}" method="post">
+                                <input type="hidden" name="rol" value="ROLE_ADMIN">
+                                <button type="submit" class="btn-admin-accion">✓ Admin</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <!-- ACTIVOS -->
+        <div class="seccion-usuarios-activos">
+            <h2 class="subtitulo-seccion-activo">
+                ✓ Usuarios activos
+                <span th:if="${#lists.isEmpty(activos)}" class="subtitulo-seccion-nota">— ninguno registrado</span>
+            </h2>
+
+            <div th:each="u : ${activos}" class="tarjeta-registro">
+                <div class="tarjeta-cabecera">
+                    <h2 class="tarjeta-titulo" th:text="${u.usuario}"></h2>
+                    <div class="tarjeta-acciones">
+                        <span class="insignia" th:text="${'ID #' + u.id}"></span>
+                        <span class="insignia"
+                              th:text="${u.rol}"
+                              th:classappend="${u.rol == 'ROLE_ADMIN'} ? 'insignia-admin' : ''"></span>
+                    </div>
+                </div>
+                <div class="rejilla-datos">
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Estado</span>
+                        <p class="valor-dato valor-habilitado">✓ Habilitado</p>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Cambiar rol a</span>
+                        <div class="fila-botones">
+                            <form th:action="@{/admin/cambiarRol/} + ${u.id}" method="post">
+                                <input type="hidden" name="rol" value="ROLE_CLIENTE">
+                                <button type="submit" class="btn-editar">Cliente</button>
+                            </form>
+                            <form th:action="@{/admin/cambiarRol/} + ${u.id}" method="post">
+                                <input type="hidden" name="rol" value="ROLE_ADMIN">
+                                <button type="submit" class="btn-admin-accion">Admin</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="bloque-dato">
+                        <span class="etiqueta-dato">Acciones</span>
+                        <form th:action="@{/admin/deshabilitar/} + ${u.id}" method="post">
+                            <button type="submit" class="btn-eliminar"
+                                    onclick="return confirm('¿Seguro que deseas deshabilitar este usuario?')">
+                                Deshabilitar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="nota-pie">Sistema de Gestión de Usuarios &bull; Spring Boot & Thymeleaf</p>
+    </div>
+</body>
+</html>

@@ -31,11 +31,20 @@ public class JpaServicioDetalleUsuario implements UserDetailsService{
         
         List<GrantedAuthority> autoridades = new ArrayList<>();
         String rol = usuario.getRol();
-        if (rol != null && !rol.startsWith("ROLE_")) {
+        // Si no tiene rol asignado aún, se le da uno de solo lectura
+        if (rol == null || rol.isBlank()) {
+            rol = "ROLE_PENDIENTE";
+        } else if (!rol.startsWith("ROLE_")) {
             rol = "ROLE_" + rol;
         }
         autoridades.add(new SimpleGrantedAuthority(rol));
-        return new User(usuario.getUsuario(), usuario.getContraseña(), true, true, true, true, autoridades);
+
+        return new User(
+            usuario.getUsuario(), 
+            usuario.getContraseña(), 
+            usuario.isHabilitado(), 
+            true, true, true, 
+            autoridades);
     }
     
 }

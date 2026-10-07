@@ -383,3 +383,529 @@ body::after {
     color: #ffffff;
     border-color: rgba(239, 68, 68, 0.6);
 }
+
+/* =============================================
+   MENSAJES: alerta-error / alerta-exito
+   ============================================= */
+.alerta-exito {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+}
+
+.alerta-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    margin-bottom: 1.25rem;
+}
+
+/* =============================================
+   ENCABEZADO DE FORMULARIO CENTRADO
+   ============================================= */
+.encabezado-formulario {
+    margin-bottom: 1.75rem;
+}
+
+.subtitulo-centrado {
+    text-align: center;
+    margin-top: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* =============================================
+   BOTÓN ANCHO COMPLETO
+   ============================================= */
+.btn-bloque {
+    width: 100%;
+    margin-top: 1.75rem;
+}
+
+/* =============================================
+   ENLACE DE PIE (login/registro)
+   ============================================= */
+.enlace-pie {
+    text-align: center;
+    margin-top: 1.25rem;
+}
+
+.enlace-pie a {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.enlace-pie a span {
+    color: var(--purple-light);
+}
+
+/* =============================================
+   CAJA DE FORMULARIO ANCHA (registro)
+   ============================================= */
+.caja-formulario-ancha {
+    max-width: 540px;
+}
+
+/* =============================================
+   DASHBOARD
+   ============================================= */
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.tarjeta-stat {
+    background: var(--card-bg);
+    border: 1px solid var(--border-purple);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.tarjeta-stat:hover {
+    border-color: var(--border-purple-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
+}
+
+.stat-numero {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e9d5ff 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.stat-numero-alerta {
+    background: linear-gradient(135deg, #fde68a, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.grid-accesos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.acceso-rapido {
+    background: var(--card-bg);
+    border: 1px solid var(--border-purple);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.25s ease;
+}
+
+.acceso-rapido:hover {
+    border-color: var(--border-purple-hover);
+    background: rgba(168, 85, 247, 0.08);
+    transform: translateY(-1px);
+}
+
+.acceso-icono {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.acceso-texto {
+    display: flex;
+    flex-direction: column;
+}
+
+.acceso-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.acceso-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+}
+
+.seccion-titulo {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+/* =============================================
+   GESTIÓN DE USUARIOS
+   ============================================= */
+.subtitulo-seccion-pendiente {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f9a8d4;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+}
+
+.subtitulo-seccion-activo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #86efac;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+}
+
+.subtitulo-seccion-nota {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    text-transform: none;
+}
+
+.seccion-usuarios {
+    margin-bottom: 2rem;
+}
+
+.seccion-usuarios-activos {
+    margin-top: 2rem;
+}
+
+.valor-pendiente {
+    color: #fbbf24;
+}
+
+.valor-habilitado {
+    color: #4ade80;
+}
+
+.btn-admin-accion {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    background: rgba(168, 85, 247, 0.2);
+    color: #e9d5ff;
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+}
+
+.btn-admin-accion:hover {
+    background: rgba(168, 85, 247, 0.35);
+    color: #ffffff;
+}
+
+.fila-botones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.insignia-admin {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #e9d5ff;
+}
+
+/* =============================================
+   CARRITO
+   ============================================= */
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.tabla-carrito th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-purple);
+    text-align: left;
+}
+
+.tabla-carrito td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.08);
+    color: var(--text-main);
+    font-size: 0.92rem;
+    vertical-align: middle;
+}
+
+.tabla-carrito tr:last-child td {
+    border-bottom: none;
+}
+
+.tarjeta-tabla {
+    padding: 0;
+    overflow: hidden;
+}
+
+.input-cantidad {
+    width: 70px;
+    padding: 0.4rem 0.6rem;
+    background: rgba(10, 7, 18, 0.7);
+    border: 1px solid var(--border-purple);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    text-align: center;
+    outline: none;
+}
+
+.input-cantidad:focus {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+}
+
+.form-cantidad {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.td-nombre {
+    font-weight: 600;
+}
+
+.td-subtotal {
+    font-weight: 600;
+    color: var(--purple-light);
+}
+
+.fila-total {
+    background: rgba(168, 85, 247, 0.06);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-purple);
+}
+
+.total-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.total-valor {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e9d5ff 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.barra-acciones-carrito {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.btn-vaciar {
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+}
+
+.estado-vacio {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+.estado-vacio .icono-grande {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.estado-vacio-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.btn-vacio-accion {
+    margin-top: 1.5rem;
+    display: inline-flex;
+}
+
+/* =============================================
+   CARRITO — CONTADOR BADGE
+   ============================================= */
+.badge-carrito {
+    background: var(--purple-main);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.4rem;
+}
+
+.btn-carrito {
+    border-color: rgba(168, 85, 247, 0.5);
+    color: var(--purple-light);
+}
+
+/* =============================================
+   MIS PEDIDOS
+   ============================================= */
+.badge-estado {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.estado-PENDIENTE  { background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); }
+.estado-CONFIRMADO { background: rgba(34, 197, 94, 0.12);  color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.35); }
+.estado-ENVIADO    { background: rgba(96, 165, 250, 0.12); color: #93c5fd; border: 1px solid rgba(96, 165, 250, 0.35); }
+.estado-ENTREGADO  { background: rgba(168, 85, 247, 0.12); color: #e9d5ff; border: 1px solid rgba(168, 85, 247, 0.35); }
+.estado-CANCELADO  { background: rgba(239, 68, 68, 0.12);  color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); }
+
+.tabla-detalles {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75rem;
+}
+
+.tabla-detalles th {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 700;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+    text-align: left;
+}
+
+.tabla-detalles td {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.05);
+}
+
+.tabla-detalles tr:last-child td {
+    border-bottom: none;
+}
+
+.cabecera-pedido {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.insignia-total {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: rgba(168, 85, 247, 0.5);
+    color: #e9d5ff;
+}
+
+/* =============================================
+   LISTAR PRODUCTOS — AGREGAR AL CARRITO
+   ============================================= */
+.fila-agregar-carrito {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input-cantidad-producto {
+    width: 65px;
+    padding: 0.4rem 0.6rem;
+    background: rgba(10, 7, 18, 0.7);
+    border: 1px solid var(--border-purple);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.88rem;
+    text-align: center;
+    outline: none;
+}
+
+.input-cantidad-producto:focus {
+    border-color: var(--purple-main);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+}
+
+.btn-agregar-carrito {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+.sin-stock {
+    font-size: 0.82rem;
+    color: #f87171;
+    font-weight: 600;
+}
+
+/* =============================================
+   GESTIÓN USUARIOS — BARRA NAVEGACIÓN
+   ============================================= */
+.btn-gestionar-usuarios {
+    border-color: rgba(168, 85, 247, 0.5);
+    color: var(--purple-light);
+}
+
+/* =============================================
+   BARRA DE ACCIONES — GRUPOS IZQUIERDA/DERECHA
+   ============================================= */
+.barra-izquierda {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.barra-derecha {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}

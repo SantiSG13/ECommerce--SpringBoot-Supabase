@@ -1,6 +1,9 @@
 package com.example.demo.Controllers;
 
 import java.security.Principal;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,23 +11,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
+
     @GetMapping("/login")
-    public String login(@RequestParam(value="error", required=false) String error,
-                        @RequestParam(value="logout", required=false) String logout,
-                        Model model, Principal principal){
-        
-        if(principal != null){
-            // Si el usuario ya esta autenticado, redirigir a la vista principal
-            return "redirect:/Cliente/Listar";
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout,
+                        Model model,
+                        Principal principal,
+                        Authentication authentication,
+                        jakarta.servlet.http.HttpSession session) {
+
+        // Si ya está autenticado, redirigir según su rol
+        if (principal != null && authentication != null) {
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                return "redirect:/admin/dashboard";
+            } else {
+                return "redirect:/Producto/listar";
+            }
         }
+
         if (error != null) {
-            // Si hay un error, mostrar un mensaje de error
-            model.addAttribute("error", "Error en el login");
+            Object ex = session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+            if (ex != null && ex.toString().contains("disabled")) {
+                model.addAttribute("error", "Tu cuenta está pendiente de aprobación por un administrador.");
+            } else {
+                model.addAttribute("error", "Usuario o contraseña incorrectos.");
+            }
         }
+
         if (logout != null) {
-            // Si hay un logout, mostrar un mensaje de logout
             model.addAttribute("success", "Has cerrado sesión");
         }
+
         return "login";
     }
 }

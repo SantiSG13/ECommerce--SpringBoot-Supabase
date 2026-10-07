@@ -2,9 +2,12 @@ package com.example.demo.Modelos.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 import java.io.Serializable;
@@ -24,9 +27,23 @@ public class Usuario implements Serializable { //Permiso para empaquetar la clas
     @Column(unique = true, length = 30)
     private String usuario;
 
+    @Column(name = "contrasena")
     private String contraseña;
 
     private String rol;
+
+    private String nombre;
+
+    private String apellido;
+
+    private String email;
+
+    @Column(nullable = false)
+    private boolean habilitado = false;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
@@ -36,7 +53,8 @@ public class Usuario implements Serializable { //Permiso para empaquetar la clas
         this.id = id;
         this.usuario = usuario;
         this.contraseña = contraseña;
-        this.rol = rol; 
+        this.rol = rol;
+        this.habilitado = false;
     }
 
     public Usuario(){
@@ -80,5 +98,45 @@ public class Usuario implements Serializable { //Permiso para empaquetar la clas
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

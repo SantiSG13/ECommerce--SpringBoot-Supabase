@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Panel de Administración</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn-logout-fijo">&#x2192; Cerrar Sesión</button>
+    </form>
+
+    <div class="contenedor-principal">
+
+        <div class="encabezado-seccion">
+            <h1 class="titulo-pagina" th:text="${titulo}">Panel de Administración</h1>
+            <p class="subtitulo-pagina">Bienvenido, <strong sec:authentication="name"></strong></p>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <p class="seccion-titulo">Resumen del sistema</p>
+        <div class="grid-tarjetas">
+            <div class="tarjeta-stat">
+                <span class="stat-numero" th:text="${totalClientes}">0</span>
+                <span class="stat-label">Clientes activos</span>
+            </div>
+            <div class="tarjeta-stat">
+                <span class="stat-numero" th:text="${pendientes}"
+                    th:classappend="${pendientes > 0} ? 'stat-numero-alerta' : ''">0</span>
+                <span class="stat-label">Cuentas pendientes</span>
+            </div>
+        </div>
+
+        <div class="linea-separadora"></div>
+
+        <p class="seccion-titulo">Accesos rápidos</p>
+        <div class="grid-accesos">
+            <a th:href="@{/admin/usuarios}" class="acceso-rapido">
+                <span class="acceso-icono">👥</span>
+                <div class="acceso-texto">
+                    <span class="acceso-titulo">Gestionar Usuarios</span>
+                    <span class="acceso-desc">Aprobar, asignar roles y deshabilitar cuentas</span>
+                </div>
+            </a>
+            <a th:href="@{/Producto/listar}" class="acceso-rapido">
+                <span class="acceso-icono">📦</span>
+                <div class="acceso-texto">
+                    <span class="acceso-titulo">Productos</span>
+                    <span class="acceso-desc">Ver, crear y editar el inventario</span>
+                </div>
+            </a>
+            <a th:href="@{/Cliente/listar}" class="acceso-rapido">
+                <span class="acceso-icono">🧾</span>
+                <div class="acceso-texto">
+                    <span class="acceso-titulo">Clientes</span>
+                    <span class="acceso-desc">Consultar registros de clientes</span>
+                </div>
+            </a>
+        </div>
+
+        <p class="nota-pie">Sistema de Gestión &bull; Spring Boot & Thymeleaf</p>
+    </div>
+</body>
+
+</html>

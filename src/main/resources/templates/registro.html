@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+    <div class="contenedor-formulario-padre">
+        <div class="caja-formulario caja-formulario-ancha">
+
+            <div class="encabezado-formulario">
+                <h1 class="titulo-pagina titulo-centrado">Crear Cuenta</h1>
+                <p class="subtitulo-centrado">Tu cuenta será revisada por un administrador</p>
+            </div>
+
+            <div th:if="${error}" class="alerta-error" th:text="${error}"></div>
+            <div th:if="${success}" class="alerta-exito" th:text="${success}"></div>
+
+            <form th:if="${success == null}" th:action="@{/registro}" method="post">
+                <div class="grupo-input-doble">
+                    <div class="grupo-input">
+                        <label for="nombre" class="etiqueta-input">Nombre</label>
+                        <input type="text" id="nombre" name="nombre"
+                               class="campo-texto" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="apellido" class="etiqueta-input">Apellido</label>
+                        <input type="text" id="apellido" name="apellido"
+                               class="campo-texto" placeholder="Tu apellido" required>
+                    </div>
+                </div>
+                <div class="grupo-input">
+                    <label for="email" class="etiqueta-input">Correo Electrónico</label>
+                    <input type="email" id="email" name="email"
+                           class="campo-texto" placeholder="tu@correo.com" required>
+                </div>
+                <div class="grupo-input">
+                    <label for="usuario" class="etiqueta-input">Usuario</label>
+                    <input type="text" id="usuario" name="usuario"
+                           class="campo-texto" placeholder="Elige un nombre de usuario" required autofocus>
+                </div>
+                <div class="grupo-input">
+                    <label for="password" class="etiqueta-input">Contraseña</label>
+                    <input type="password" id="password" name="password"
+                           class="campo-texto" placeholder="Crea una contraseña" required>
+                </div>
+                <div class="grupo-input">
+                    <label for="confirmar" class="etiqueta-input">Confirmar Contraseña</label>
+                    <input type="password" id="confirmar" name="confirmar"
+                           class="campo-texto" placeholder="Repite la contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-principal btn-bloque">Registrarse</button>
+            </form>
+
+            <div class="enlace-pie">
+                <a th:href="@{/login}">¿Ya tienes cuenta? <span>Inicia sesión</span></a>
+            </div>
+
+            <p class="nota-pie">Sistema de Gestión &bull; Spring Boot & Thymeleaf</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,63 +1,43 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
-
 <body>
     <div class="contenedor-formulario-padre">
         <div class="caja-formulario">
 
-            <!-- Encabezado -->
-            <div class="encabezado-seccion" style="margin-bottom: 1.75rem;">
+            <div class="encabezado-formulario">
                 <h1 class="titulo-pagina titulo-centrado">Iniciar Sesión</h1>
-                <p class="subtitulo-pagina" style="text-align: center; margin-top: 0.4rem;">Accede al sistema de gestión</p>
+                <p class="subtitulo-centrado">Accede al sistema de gestión</p>
             </div>
 
-            <!-- Mensaje de error -->
-            <div th:if="${error}"
-                 style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171;
-                        padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.88rem; margin-bottom: 1.25rem;"
-                 th:text="${error}">
-            </div>
+            <div th:if="${error}" class="alerta-error" th:text="${error}"></div>
+            <div th:if="${success}" class="alerta-exito" th:text="${success}"></div>
 
-            <!-- Mensaje de logout -->
-            <div th:if="${success}"
-                 style="background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #4ade80;
-                        padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.88rem; margin-bottom: 1.25rem;"
-                 th:text="${success}">
-            </div>
-
-            <!-- Formulario -->
             <form th:action="@{/login}" method="post">
-
                 <div class="grupo-input">
                     <label for="username" class="etiqueta-input">Usuario</label>
                     <input type="text" id="username" name="username"
                            class="campo-texto" placeholder="Ingresa tu usuario" required autofocus>
                 </div>
-
                 <div class="grupo-input">
                     <label for="password" class="etiqueta-input">Contraseña</label>
                     <input type="password" id="password" name="password"
                            class="campo-texto" placeholder="Ingresa tu contraseña" required>
                 </div>
-
-                <div style="margin-top: 1.75rem;">
-                    <button type="submit" class="btn btn-principal" style="width: 100%;">
-                        Entrar
-                    </button>
-                </div>
-
+                <button type="submit" class="btn btn-principal btn-bloque">Entrar</button>
             </form>
 
-            <p class="nota-pie" style="margin-top: 1.5rem;">Sistema de Gestión &bull; Spring Boot & Thymeleaf</p>
+            <p class="nota-pie">Sistema de Gestión &bull; Spring Boot & Thymeleaf</p>
+
+            <div class="enlace-pie">
+                <a th:href="@{/registro}">¿No tienes cuenta? <span>Regístrate</span></a>
+            </div>
         </div>
     </div>
 </body>
-
 </html>

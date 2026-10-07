@@ -20,6 +20,9 @@ public class SpringSecurityConfig {
     @Qualifier("JpaServicioDetalleUsuario")
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -38,14 +41,18 @@ public class SpringSecurityConfig {
         http.authenticationProvider(authenticationProvider());
         http
             .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/", "/login", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/h2/**", "/h2").permitAll()
-                .requestMatchers("/Cliente/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/Producto/**").hasAnyRole("ADMIN")
+                .requestMatchers("/", "/login", "/registro", "/css/**", "/js/**", "/images/**", "/h2-console/**", "/h2/**", "/h2").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/Cliente/**").hasRole("ADMIN")
+                .requestMatchers("/Producto/listar").hasAnyRole("CLIENTE", "ADMIN")
+                .requestMatchers("/Producto/formulario/**", "/Producto/eliminar/**").hasRole("ADMIN")
+                .requestMatchers("/Producto/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/Cliente/listar", true)
+                .successHandler(loginSuccessHandler)
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout((logout) -> logout
